@@ -5,7 +5,7 @@ import {resolve,dirname} from 'node:path';
 import {validate} from './coach.js';
 import {generatePlan, CoachError, DEFAULT_MODEL} from './ai-coach.js';
 const root = dirname(fileURLToPath(import.meta.url));
-const files = {'/':['index.html','text/html'],'/style.css':['style.css','text/css'],'/script.js':['script.js','text/javascript']};
+const files = {'/':['index.html','text/html'],'/style.css':['style.css','text/css'],'/script.js':['script.js','text/javascript'],'/match-rules.js':['match-rules.js','text/javascript']};
 const json = (res,status,data) => {
   res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});
   res.end(JSON.stringify(data));
@@ -29,7 +29,7 @@ export function createServer({apiKey = process.env.GROQ_API_KEY || '', model = p
         const input = JSON.parse(Buffer.concat(chunks).toString('utf8'));
         if (!input || typeof input !== 'object' || Array.isArray(input)) throw Error();
         s = validate(input);
-      } catch { return json(res,400,{error:'Проверь поля формы: деньги 0–16000, раунд 1–48, серия поражений 0–5.'}); }
+      } catch { return json(res,400,{error:'Проверь поля формы: деньги 0–16000, раунд 1–120, серия поражений 0–5.'}); }
       try { return json(res,200,await generatePlan(s,{apiKey,model,fetchImpl})); }
       catch (error) { return json(res,error instanceof CoachError ? error.status : 502,{error:error instanceof CoachError ? error.message : 'Не удалось составить план.'}); }
     }

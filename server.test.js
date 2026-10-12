@@ -22,5 +22,14 @@ test('provider errors propagate without leaking a key or local fallback',async()
 test('AI plan reaches frontend and sources are server controlled',async()=>withServer({apiKey:'secret',fetchImpl:async()=>new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:JSON.stringify({type:'Эко',reason:'Сохранить',items:[],roles:['1','2','3','4','5'],steps:['a','b','c'],fallback:'Отойти',assumptions:['Инвентарь команды неизвестен'],call:'Вместе',lesson:'Размен',economy:'Следующий раунд',inventory:'Пистолет',proBasis:'Общий принцип',referenceIds:[]})}}]}))},async url=>{
   const res=await post(url,input);assert.equal(res.status,200);const body=await res.json();assert.equal(body.source,'groq');assert.equal(body.cost,0);assert.equal(body.balance,3200);assert.equal(body.roles.length,5);
   const page=await (await fetch(url)).text();assert.ok(!page.includes('name="mode"'));assert.ok(!page.includes('Hugging Face'));
+  assert.ok(!page.includes('name="last"'));assert.ok(page.includes('id="round-context"'));assert.ok(page.includes('type="module"'));
+  const shared=await fetch(url+'/match-rules.js');assert.equal(shared.status,200);assert.match(await shared.text(),/isDecisiveRound/);
   assert.equal((await fetch(url+'/.env')).status,404);assert.equal((await fetch(url+'/ai-coach.js')).status,404);
+}));
+test('round context reaching AI is authoritative for regulation and overtime',async()=>withServer({apiKey:'secret',fetchImpl:async(_,init)=>{
+  const context=JSON.parse(JSON.parse(init.body).messages[1].content);
+  assert.equal(context.situation.last,[12,24,30,36,54].includes(context.situation.round));
+  return new Response('{}',{status:429});
+}},async url=>{
+  for(const round of [8,12,13,24,25,30,31,36,54])assert.equal((await post(url,{...input,round,last:false})).status,429);
 }));

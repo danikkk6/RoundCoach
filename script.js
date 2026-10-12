@@ -1,4 +1,11 @@
+import {isDecisiveRound} from './match-rules.js';
 const form=document.querySelector('#coach-form'), result=document.querySelector('#result'), submit=document.querySelector('#submit');
+function updateRoundContext(){
+  const round=Number(form.elements.round.value);
+  document.querySelector('#round-context').textContent=isDecisiveRound(round)?'Решающий раунд · конец половины или блока овертайма':'Обычный раунд';
+}
+form.elements.round.addEventListener('input',updateRoundContext);
+updateRoundContext();
 let lastText='';
 const node=(tag,text,cls)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el;};
 function section(title,values){result.append(node('h4',title));const list=node('ol');for(const v of values)list.append(node('li',v));result.append(list);}
@@ -21,12 +28,12 @@ function render(plan,s){
   copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(lastText);msg.textContent='Скопировано';}catch{msg.textContent='Выдели текст и скопируй вручную.';}});actions.append(copy,msg);result.append(actions);
 }
 form.addEventListener('submit',async event=>{
-  event.preventDefault();const s=Object.fromEntries(new FormData(form));s.last=form.elements.last.checked;
+  event.preventDefault();const s=Object.fromEntries(new FormData(form));s.last=isDecisiveRound(Number(s.round));
   submit.disabled=true;submit.textContent='ИИ составляет план…';document.querySelector('#results').setAttribute('aria-busy','true');
   try{const response=await fetch('/api/coach',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(s)});const plan=await response.json();if(!response.ok)throw Error(plan.error);render(plan,s);}
   catch(error){result.replaceChildren(node('p',error.message || 'Не удалось связаться с сервером.','error'));}
   finally{submit.disabled=false;submit.textContent='Составить план ↗';document.querySelector('#results').setAttribute('aria-busy','false');}
 });
-const presets={eco:{side:'CT',money:1200,teamMoney:1400,round:8,losses:2,enemy:'buy',last:false},buy:{side:'T',money:5200,teamMoney:5100,round:7,losses:0,enemy:'buy',last:false},force:{side:'CT',money:2600,teamMoney:2500,round:24,losses:2,enemy:'buy',last:true}};
-document.querySelectorAll('[data-preset]').forEach(button=>button.addEventListener('click',()=>{for(const [key,value]of Object.entries(presets[button.dataset.preset])){if(key==='last')form.elements[key].checked=value;else form.elements[key].value=value;}form.elements.weapon.value='none';form.elements.armor.value='none';form.elements.notes.value='';form.requestSubmit();}));
+const presets={eco:{side:'CT',money:1200,teamMoney:1400,round:8,losses:2,enemy:'buy'},buy:{side:'T',money:5200,teamMoney:5100,round:7,losses:0,enemy:'buy'},force:{side:'CT',money:2600,teamMoney:2500,round:24,losses:2,enemy:'buy'}};
+document.querySelectorAll('[data-preset]').forEach(button=>button.addEventListener('click',()=>{for(const [key,value]of Object.entries(presets[button.dataset.preset]))form.elements[key].value=value;form.elements.weapon.value='none';form.elements.armor.value='none';form.elements.notes.value='';updateRoundContext();form.requestSubmit();}));
 fetch('/api/status').then(r=>{if(!r.ok)throw Error();return r.json();}).then(s=>{document.querySelector('#status').textContent=s.aiConfigured?'ИИ · ключ Groq настроен':'Для ИИ нужен GROQ_API_KEY';}).catch(()=>{document.querySelector('#status').textContent='Сервер недоступен';});

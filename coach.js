@@ -1,4 +1,5 @@
 // Input validation and map vocabulary only; all coaching decisions come from AI.
+import {isDecisiveRound} from './match-rules.js';
 export const maps = {
   Mirage: {a:'A ramp / Palace', b:'B apartments', mid:'Mid / Connector', ct:['A site','B site','Window / Connector']},
   'Dust II': {a:'Long / Short', b:'B tunnels', mid:'Mid / Lower tunnels', ct:['Long / A site','B site','Mid / CT']},
@@ -20,5 +21,6 @@ export function validate(raw) {
   if (!['none','rifle','smg','awp'].includes(raw.weapon) || !['none','vest','helmet'].includes(raw.armor)) throw Error('Проверь снаряжение.');
   if (!['unknown','eco','buy'].includes(raw.enemy)) throw Error('Проверь экономику соперника.');
   if (typeof raw.notes !== 'string' || raw.notes.length > 700) throw Error('Комментарий должен быть короче 700 символов.');
-  return {map:raw.map, side:raw.side, money:number('money',0,16000), teamMoney:number('teamMoney',0,16000), round:number('round',1,48), losses:number('losses',0,5), weapon:raw.weapon, armor:raw.armor, enemy:raw.enemy, last: raw.last === true, notes:raw.notes.trim()};
+  const round = number('round',1,120);
+  return {map:raw.map, side:raw.side, money:number('money',0,16000), teamMoney:number('teamMoney',0,16000), round, losses:number('losses',0,5), weapon:raw.weapon, armor:raw.armor, enemy:raw.enemy, last:isDecisiveRound(round), notes:raw.notes.trim()};
 }
