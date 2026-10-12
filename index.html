@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RoundCoach — твой следующий раунд</title><link rel="stylesheet" href="/style.css"><script src="/script.js" defer></script></head>
+<body>
+<header><a class="brand" href="/">RC<span>ROUNDCOACH</span></a><span id="status" class="badge">Проверяем подключение…</span></header>
+<main>
+<section class="hero"><div class="eyebrow">CS2 · ТРЕНИРУЙ МЫШЛЕНИЕ</div><h1>Хороший раунд<br>начинается <em>с плана.</em></h1><p>Укажи ситуацию. Получи закупку, роли для команды и понятный план действий.</p></section>
+<div class="workspace">
+<section class="panel"><div class="section-title"><span class="number">01</span><h2>Ситуация в матче</h2></div>
+<div class="presets"><button type="button" data-preset="eco">Эко на CT</button><button type="button" data-preset="buy">Выход на T</button><button type="button" data-preset="force">Решающий раунд</button></div>
+<form id="coach-form">
+<div class="grid"><label>Карта<select name="map"><option>Mirage</option><option>Dust II</option><option>Inferno</option><option>Nuke</option><option>Ancient</option><option>Anubis</option><option>Vertigo</option></select></label><label>Сторона<select name="side"><option value="CT">CT · Защита</option><option value="T">T · Атака</option></select></label>
+<label>Твои деньги, $<input name="money" type="number" min="0" max="16000" step="1" value="3200" required></label><label>Средние деньги команды, $<input name="teamMoney" type="number" min="0" max="16000" step="1" value="3200" required></label>
+<label>Номер раунда<input name="round" type="number" min="1" max="48" value="8" required></label><label>Серия поражений<select name="losses"><option value="0">0 · $1400</option><option value="1">1 · $1900</option><option value="2" selected>2 · $2400</option><option value="3">3 · $2900</option><option value="4">4 · $3400</option><option value="5">5+ · $3400</option></select></label>
+<label>Оружие уже есть<select name="weapon"><option value="none">Только стартовый пистолет</option><option value="rifle">Винтовка</option><option value="smg">Пистолет-пулемёт</option><option value="awp">AWP</option></select></label><label>Броня уже есть<select name="armor"><option value="none">Нет</option><option value="vest">Полная броня без шлема</option><option value="helmet">Полная броня + шлем</option></select></label>
+<label>Экономика соперника<select name="enemy"><option value="unknown">Не знаю</option><option value="eco">Предполагаю эко</option><option value="buy">Предполагаю закупку</option></select></label><label>Режим ответа<select name="mode"><option value="local">Демо · правила</option><option value="ai">ИИ · Hugging Face</option></select></label></div>
+<label class="check"><input type="checkbox" name="last">Решающий раунд — нужно играть на победу сейчас</label>
+<label>Что ещё должен знать тренер?<textarea name="notes" maxlength="700" rows="3" placeholder="Например: соперник часто выходит на B, играем с друзьями…"></textarea></label>
+<button class="primary" id="submit" type="submit">Составить план <span>↗</span></button>
+<p class="hint">План рассчитан на 5 игроков. Учти дропы и договорись о закупке с командой. Гранаты в инвентаре пока не учитываются.</p>
+</form></section>
+<section class="panel result-panel" aria-live="polite" aria-busy="false" id="results"><div class="section-title"><span class="number">02</span><h2>План на раунд</h2></div><div id="result"><div class="empty"><div class="crosshair">⌖</div><h3>Каждый доллар — решение.</h3><p>Заполни ситуацию слева или выбери пример.<br>Здесь появятся закупка и план раунда.</p><div class="tags"><span>ЭКОНОМИКА</span><span>КОМАНДА</span><span>ТАКТИКА</span></div></div></div></section>
+</div><footer>ROUNDCOACH / Учебный проект · Локальные планы — эвристики, ИИ может ошибаться. Цены можно обновить в coach.js.</footer></main>
+</body></html>
