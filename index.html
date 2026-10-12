@@ -12,12 +12,12 @@
 <label>Твои деньги, $<input name="money" type="number" min="0" max="16000" step="1" value="3200" required></label><label>Средние деньги команды, $<input name="teamMoney" type="number" min="0" max="16000" step="1" value="3200" required></label>
 <label>Номер раунда<input name="round" type="number" min="1" max="48" value="8" required></label><label>Серия поражений<select name="losses"><option value="0">0 · $1400</option><option value="1">1 · $1900</option><option value="2" selected>2 · $2400</option><option value="3">3 · $2900</option><option value="4">4 · $3400</option><option value="5">5+ · $3400</option></select></label>
 <label>Оружие уже есть<select name="weapon"><option value="none">Только стартовый пистолет</option><option value="rifle">Винтовка</option><option value="smg">Пистолет-пулемёт</option><option value="awp">AWP</option></select></label><label>Броня уже есть<select name="armor"><option value="none">Нет</option><option value="vest">Полная броня без шлема</option><option value="helmet">Полная броня + шлем</option></select></label>
-<label>Экономика соперника<select name="enemy"><option value="unknown">Не знаю</option><option value="eco">Предполагаю эко</option><option value="buy">Предполагаю закупку</option></select></label><label>Режим ответа<select name="mode"><option value="local">Демо · правила</option><option value="ai">ИИ · Hugging Face</option></select></label></div>
+<label>Экономика соперника<select name="enemy"><option value="unknown">Не знаю</option><option value="eco">Предполагаю эко</option><option value="buy">Предполагаю закупку</option></select></label></div>
 <label class="check"><input type="checkbox" name="last">Решающий раунд — нужно играть на победу сейчас</label>
 <label>Что ещё должен знать тренер?<textarea name="notes" maxlength="700" rows="3" placeholder="Например: соперник часто выходит на B, играем с друзьями…"></textarea></label>
 <button class="primary" id="submit" type="submit">Составить план <span>↗</span></button>
-<p class="hint">План рассчитан на 5 игроков. Учти дропы и договорись о закупке с командой. Гранаты в инвентаре пока не учитываются.</p>
+<p class="hint">План создаёт ИИ. Подтверди деньги, дропы и гранаты остальных игроков с командой. Цены — оценка, проверь их в игре.</p>
 </form></section>
 <section class="panel result-panel" aria-live="polite" aria-busy="false" id="results"><div class="section-title"><span class="number">02</span><h2>План на раунд</h2></div><div id="result"><div class="empty"><div class="crosshair">⌖</div><h3>Каждый доллар — решение.</h3><p>Заполни ситуацию слева или выбери пример.<br>Здесь появятся закупка и план раунда.</p><div class="tags"><span>ЭКОНОМИКА</span><span>КОМАНДА</span><span>ТАКТИКА</span></div></div></div></section>
-</div><footer>ROUNDCOACH / Учебный проект · Локальные планы — эвристики, ИИ может ошибаться. Цены можно обновить в coach.js.</footer></main>
+</div><footer>ROUNDCOACH / ИИ-тренер · Рекомендации могут содержать ошибки. Про-примеры и допущения указаны в плане.</footer></main>
 </body></html>
