@@ -32,7 +32,7 @@ const server=http.createServer(async(req,res)=>{
   if(req.method==='GET' && url.pathname==='/api/status') return json(res,200,{aiConfigured:Boolean(token),model:token?model:null});
   if(req.method==='POST' && url.pathname==='/api/coach') {
     // Only accept requests initiated by the local page.
-    if(req.headers.origin && req.headers.origin!==`http://${req.headers.host}`) return json(res,403,{error:'Недопустимый источник запроса.'});
+    if(req.headers.origin && ![`http://${req.headers.host}`,`https://${req.headers.host}`].includes(req.headers.origin)) return json(res,403,{error:'Недопустимый источник запроса.'});
     let body='';
     try {
       for await(const chunk of req){body+=chunk;if(Buffer.byteLength(body)>10000){json(res,413,{error:'Слишком большой запрос.'});return;}}
@@ -50,5 +50,5 @@ const server=http.createServer(async(req,res)=>{
   }
   json(res,404,{error:'Страница не найдена.'});
 });
-server.listen(Number(process.env.PORT || 3000),'127.0.0.1',()=>console.log(`RoundCoach: http://localhost:${server.address().port} | ${token?'Hugging Face configured':'Demo mode (no AI key)'}`));
+server.listen(Number(process.env.PORT || 3000),process.env.HOST || '127.0.0.1',()=>console.log(`RoundCoach: port ${server.address().port} | ${token?'Hugging Face configured':'Demo mode (no AI key)'}`));
 server.on('error',error=>{console.error(error.code==='EADDRINUSE'?'Порт занят. Укажи другой PORT в .env.':error.message);process.exitCode=1;});

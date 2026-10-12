@@ -31,6 +31,14 @@ node server.js
 
 ## Файлы
 
+## Публикация на Render
+
+Создай Web Service на https://render.com, подключи репозиторий danikkk6/RoundCoach, выбери ветку main и runtime Node. Build Command: npm install. Start Command: node server.js. В Environment добавь HOST=0.0.0.0, NODE_VERSION=24, HF_TOKEN=твой_токен и HF_MODEL=openai/gpt-oss-120b. PORT задаётся хостингом автоматически. После Deploy открой выданную ссылку onrender.com. Сначала можно запустить без HF_TOKEN, чтобы проверить демо.
+
+GitHub Pages не запускает этот Node.js-сервер. Токен хранится в настройках Render, а не в файлах GitHub. Запросы к ИИ могут расходовать кредиты; публичная версия не имеет авторизации пользователей и предназначена для учебной демонстрации.
+
+## Структура проекта
+
 - index.html — форма и структура страницы.
 - style.css — оформление.
 - script.js — отправка формы, вывод результата, примеры, копирование.
