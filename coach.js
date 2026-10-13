@@ -11,16 +11,16 @@ export const maps = {
 };
 export function validate(raw) {
   const number = (key, min, max) => {
-    if (raw[key] === '' || raw[key] === null || raw[key] === undefined) throw Error('Заполни поле: '+key);
-    if (!['string','number'].includes(typeof raw[key]) || String(raw[key]).trim() === '') throw Error('Некорректное число: '+key);
+    if (raw[key] === '' || raw[key] === null || raw[key] === undefined) throw Error('Заповни поле: '+key);
+    if (!['string','number'].includes(typeof raw[key]) || String(raw[key]).trim() === '') throw Error('Некоректне число: '+key);
     const n = Number(raw[key]);
-    if (!Number.isInteger(n) || n < min || n > max) throw Error('Недопустимое значение: '+key);
+    if (!Number.isInteger(n) || n < min || n > max) throw Error('Неприпустиме значення: '+key);
     return n;
   };
-  if (!Object.hasOwn(maps,raw.map) || !['T','CT'].includes(raw.side)) throw Error('Выбери карту и сторону.');
-  if (!['none','rifle','smg','awp'].includes(raw.weapon) || !['none','vest','helmet'].includes(raw.armor)) throw Error('Проверь снаряжение.');
-  if (!['unknown','eco','buy'].includes(raw.enemy)) throw Error('Проверь экономику соперника.');
-  if (typeof raw.notes !== 'string' || raw.notes.length > 700) throw Error('Комментарий должен быть короче 700 символов.');
+  if (!Object.hasOwn(maps,raw.map) || !['T','CT'].includes(raw.side)) throw Error('Вибери карту та сторону.');
+  if (!['none','rifle','smg','awp'].includes(raw.weapon) || !['none','vest','helmet'].includes(raw.armor)) throw Error('Перевір спорядження.');
+  if (!['unknown','eco','buy'].includes(raw.enemy)) throw Error('Перевір економіку суперника.');
+  if (typeof raw.notes !== 'string' || raw.notes.length > 700) throw Error('Коментар має містити не більше 700 символів.');
   const round = number('round',1,120);
   return {map:raw.map, side:raw.side, money:number('money',0,16000), teamMoney:number('teamMoney',0,16000), round, losses:number('losses',0,5), weapon:raw.weapon, armor:raw.armor, enemy:raw.enemy, last:isDecisiveRound(round), notes:raw.notes.trim()};
 }

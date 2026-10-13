@@ -1,23 +1,23 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RoundCoach — твой следующий раунд</title><link rel="stylesheet" href="/style.css"><script src="/script.js" type="module"></script></head>
+<html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RoundCoach — твій наступний раунд</title><link rel="stylesheet" href="/style.css"><script src="/script.js" type="module"></script></head>
 <body>
-<header><a class="brand" href="/">RC<span>ROUNDCOACH</span></a><span id="status" class="badge">Проверяем подключение…</span></header>
+<header><a class="brand" href="/">RC<span>ROUNDCOACH</span></a><span id="status" class="badge">Перевіряємо підключення…</span></header>
 <main>
-<section class="hero"><div class="eyebrow">CS2 · ТРЕНИРУЙ МЫШЛЕНИЕ</div><h1>Хороший раунд<br>начинается <em>с плана.</em></h1><p>Укажи ситуацию. Получи закупку, роли для команды и понятный план действий.</p></section>
+<section class="hero"><div class="eyebrow">CS2 · ТРЕНУЙ МИСЛЕННЯ</div><h1>Хороший раунд<br>починається <em>з плану.</em></h1><p>Опиши ситуацію. Отримай закупівлю, ролі для команди та зрозумілий план дій.</p></section>
 <div class="workspace">
-<section class="panel"><div class="section-title"><span class="number">01</span><h2>Ситуация в матче</h2></div>
-<div class="presets"><button type="button" data-preset="eco">Эко на CT</button><button type="button" data-preset="buy">Выход на T</button><button type="button" data-preset="force">Низкий бюджет</button></div>
+<section class="panel"><div class="section-title"><span class="number">01</span><h2>Ситуація в матчі</h2></div>
+<div class="presets"><button type="button" data-preset="eco">Еко на CT</button><button type="button" data-preset="buy">Вихід на T</button><button type="button" data-preset="force">Малий бюджет</button></div>
 <form id="coach-form">
-<div class="grid"><label>Карта<select name="map"><option>Mirage</option><option>Dust II</option><option>Inferno</option><option>Nuke</option><option>Ancient</option><option>Anubis</option><option>Vertigo</option></select></label><label>Сторона<select name="side"><option value="CT">CT · Защита</option><option value="T">T · Атака</option></select></label>
-<label>Твои деньги, $<input name="money" type="number" min="0" max="16000" step="1" value="3200" required></label><label>Средние деньги команды, $<input name="teamMoney" type="number" min="0" max="16000" step="1" value="3200" required></label>
-<label>Номер раунда<input name="round" type="number" min="1" max="120" value="8" required aria-describedby="round-context"></label><label>Серия поражений<select name="losses"><option value="0">0 · $1400</option><option value="1">1 · $1900</option><option value="2" selected>2 · $2400</option><option value="3">3 · $2900</option><option value="4">4 · $3400</option><option value="5">5+ · $3400</option></select></label>
-<label>Оружие уже есть<select name="weapon"><option value="none">Только стартовый пистолет</option><option value="rifle">Винтовка</option><option value="smg">Пистолет-пулемёт</option><option value="awp">AWP</option></select></label><label>Броня уже есть<select name="armor"><option value="none">Нет</option><option value="vest">Полная броня без шлема</option><option value="helmet">Полная броня + шлем</option></select></label>
-<label>Экономика соперника<select name="enemy"><option value="unknown">Не знаю</option><option value="eco">Предполагаю эко</option><option value="buy">Предполагаю закупку</option></select></label></div>
-<p id="round-context" class="hint" aria-live="polite">Обычный раунд</p>
-<label>Что ещё должен знать тренер?<textarea name="notes" maxlength="700" rows="3" placeholder="Например: соперник часто выходит на B, играем с друзьями…"></textarea></label>
-<button class="primary" id="submit" type="submit">Составить план <span>↗</span></button>
-<p class="hint">План создаёт ИИ. До 4 гранат: максимум 2 флешки, остальные типы — по одной. Подтверди гранаты команды и цены в игре.</p>
+<div class="grid"><label>Карта<select name="map"><option>Mirage</option><option>Dust II</option><option>Inferno</option><option>Nuke</option><option>Ancient</option><option>Anubis</option><option>Vertigo</option></select></label><label>Сторона<select name="side"><option value="CT">CT · Захист</option><option value="T">T · Атака</option></select></label>
+<label>Твої гроші, $<input name="money" type="number" min="0" max="16000" step="1" value="3200" required></label><label>Середні гроші команди, $<input name="teamMoney" type="number" min="0" max="16000" step="1" value="3200" required></label>
+<label>Номер раунду<input name="round" type="number" min="1" max="120" value="8" required aria-describedby="round-context"></label><label>Серія поразок<select name="losses"><option value="0">0 · $1400</option><option value="1">1 · $1900</option><option value="2" selected>2 · $2400</option><option value="3">3 · $2900</option><option value="4">4 · $3400</option><option value="5">5+ · $3400</option></select></label>
+<label>Наявна зброя<select name="weapon"><option value="none">Лише стартовий пістолет</option><option value="rifle">Гвинтівка</option><option value="smg">Пістолет-кулемет</option><option value="awp">AWP</option></select></label><label>Наявна броня<select name="armor"><option value="none">Немає</option><option value="vest">Повна броня без шолома</option><option value="helmet">Повна броня + шолом</option></select></label>
+<label>Економіка суперника<select name="enemy"><option value="unknown">Не знаю</option><option value="eco">Очікую еко</option><option value="buy">Очікую закупівлю</option></select></label></div>
+<p id="round-context" class="hint" aria-live="polite">Звичайний раунд</p>
+<label>Що ще має знати тренер?<textarea name="notes" maxlength="700" rows="3" placeholder="Наприклад: суперник часто виходить на B, граємо з друзями…"></textarea></label>
+<button class="primary" id="submit" type="submit">Скласти план <span>↗</span></button>
+<p class="hint">План створює ШІ. До 4 гранат: максимум 2 флешки, решта типів — по одній. Уточни гранати команди та ціни в грі.</p>
 </form></section>
-<section class="panel result-panel" aria-live="polite" aria-busy="false" id="results"><div class="section-title"><span class="number">02</span><h2>План на раунд</h2></div><div id="result"><div class="empty"><div class="crosshair">⌖</div><h3>Каждый доллар — решение.</h3><p>Заполни ситуацию слева или выбери пример.<br>Здесь появятся закупка и план раунда.</p><div class="tags"><span>ЭКОНОМИКА</span><span>КОМАНДА</span><span>ТАКТИКА</span></div></div></div></section>
-</div><footer>ROUNDCOACH / ИИ-тренер · Рекомендации могут содержать ошибки. Про-примеры и допущения указаны в плане.</footer></main>
+<section class="panel result-panel" aria-live="polite" aria-busy="false" id="results"><div class="section-title"><span class="number">02</span><h2>План на раунд</h2></div><div id="result"><div class="empty"><div class="crosshair">⌖</div><h3>Кожен долар — рішення.</h3><p>Опиши ситуацію ліворуч або вибери приклад.<br>Тут з’являться закупівля та план раунду.</p><div class="tags"><span>ЕКОНОМІКА</span><span>КОМАНДА</span><span>ТАКТИКА</span></div></div></div></section>
+</div><footer>ROUNDCOACH / ШІ-тренер · Рекомендації можуть містити помилки. Приклади професійної гри та припущення наведено в плані.</footer></main>
 </body></html>

@@ -14,11 +14,11 @@ export const equipment = {
   p250:weapon('P250'), dualberettas:weapon('Dual Berettas'), deagle:weapon('Desert Eagle'),
   revolver:weapon('R8 Revolver'), tec9:weapon('Tec-9','T'), fiveseven:weapon('Five-SeveN','CT'),
   cz75:weapon('CZ75-Auto'), zeus:weapon('Zeus x27'),
-  vest:weapon('Броня'), helmet:weapon('Шлем (при полной броне)'),
-  vesthelmet:weapon('Броня + шлем'), kit:weapon('Defuse kit','CT'),
-  flash:grenade('Flashbang','flash'), smoke:grenade('Smoke','smoke'),
-  he:grenade('HE grenade','he'), decoy:grenade('Decoy','decoy'),
-  molotov:grenade('Molotov','fire','T'), incendiary:grenade('Incendiary','fire','CT')
+  vest:weapon('Броня'), helmet:weapon('Шолом (за повної броні)'),
+  vesthelmet:weapon('Броня + шолом'), kit:weapon('Набір для розмінування','CT'),
+  flash:grenade('Світлошумова граната','flash'), smoke:grenade('Димова граната','smoke'),
+  he:grenade('Осколкова граната','he'), decoy:grenade('Хибна граната','decoy'),
+  molotov:grenade('Коктейль Молотова','fire','T'), incendiary:grenade('Запалювальна граната','fire','CT')
 };
 
 export function normalizePurchases(items, side) {

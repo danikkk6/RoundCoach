@@ -7,7 +7,7 @@ const buy = (...ids) => ids.map(id => ({id,price:200}));
 
 test('four grenades including two flashes are accepted',()=>{
   const items=normalizePurchases(buy('flash','flash','smoke','molotov'),'T');
-  assert.equal(items.length,4);assert.equal(items[0].name,'Flashbang');
+  assert.equal(items.length,4);assert.equal(items[0].name,'Світлошумова граната');
   assert.equal(normalizePurchases(buy('flash','smoke','he','incendiary'),'CT').length,4);
 });
 test('grenade limits cannot be bypassed by alternative item names or quantities',()=>{

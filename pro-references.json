@@ -1,5 +1,36 @@
 [
-  {"id":"refrag-defaults","title":"Refrag: CS2 101 — What Is A Default?","url":"https://refrag.gg/blog/what-is-a-default-cs2/","maps":["Mirage"],"side":"T","kind":"CS2 coaching guide; not a specific match","summary":"Defaults spread players to collect information and punish aggression, preserving utility for later decisions. Mirage examples cover A ramp, B apartments and mid. Adapt the formation to available resources rather than rushing every round."},
-  {"id":"zywoo-summit6","title":"innersh1ne / SCOPE.GG: ZywOo at cs_summit 6 (2020)","url":"https://blog.scope.gg/breaking-down-zywoos-mistakes-at-cs-summit-6-en/","maps":["Inferno"],"side":"CT","kind":"Historical CS:GO pro-game analysis; not current CS2 meta","summary":"The analyst documents a Banana molotov extinguished by a T-side smoke. Transferable lesson: observe opposing utility and reconsider your timing. Old grenade lineups and mechanics must not be copied into CS2 without verification."},
-  {"id":"teses-cologne2020","title":"innersh1ne / SCOPE.GG: TeSeS at ESL One Cologne EU (2020)","url":"https://blog.scope.gg/in-depth-look-at-teses-possible-misplays-at-esl-one-cologne-eu-en/","maps":["Nuke","Inferno"],"side":"any","kind":"Historical CS:GO pro-game analysis; not current CS2 meta","summary":"A review of TeSeS identifies wasted utility, including failed Nuke molotovs and fire landing in smoke. Transferable lesson: coordinate and practice grenades before committing teammates. This source does not establish current CS2 lineups or winning round calls."}
+  {
+    "id": "refrag-defaults",
+    "title": "Refrag: що таке default у CS2?",
+    "url": "https://refrag.gg/blog/what-is-a-default-cs2/",
+    "maps": [
+      "Mirage"
+    ],
+    "side": "T",
+    "kind": "Посібник із CS2; не розбір конкретного матчу",
+    "summary": "Defaults spread players to collect information and punish aggression, preserving utility for later decisions. Mirage examples cover A ramp, B apartments and mid. Adapt the formation to available resources rather than rushing every round."
+  },
+  {
+    "id": "zywoo-summit6",
+    "title": "innersh1ne / SCOPE.GG: гра ZywOo на cs_summit 6 (2020)",
+    "url": "https://blog.scope.gg/breaking-down-zywoos-mistakes-at-cs-summit-6-en/",
+    "maps": [
+      "Inferno"
+    ],
+    "side": "CT",
+    "kind": "Історичний розбір професійної гри в CS:GO; не поточна мета CS2",
+    "summary": "The analyst documents a Banana molotov extinguished by a T-side smoke. Transferable lesson: observe opposing utility and reconsider your timing. Old grenade lineups and mechanics must not be copied into CS2 without verification."
+  },
+  {
+    "id": "teses-cologne2020",
+    "title": "innersh1ne / SCOPE.GG: гра TeSeS на ESL One Cologne EU (2020)",
+    "url": "https://blog.scope.gg/in-depth-look-at-teses-possible-misplays-at-esl-one-cologne-eu-en/",
+    "maps": [
+      "Nuke",
+      "Inferno"
+    ],
+    "side": "any",
+    "kind": "Історичний розбір професійної гри в CS:GO; не поточна мета CS2",
+    "summary": "A review of TeSeS identifies wasted utility, including failed Nuke molotovs and fire landing in smoke. Transferable lesson: coordinate and practice grenades before committing teammates. This source does not establish current CS2 lineups or winning round calls."
+  }
 ]

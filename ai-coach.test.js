@@ -2,13 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {generatePlan,validatePlan,relevantReferences,DEFAULT_MODEL} from './ai-coach.js';
 const s={map:'Mirage',side:'T',money:3200,teamMoney:3200,round:8,losses:2,weapon:'none',armor:'none',enemy:'unknown',last:false,notes:''};
-const answer=()=>({type:'Ограниченный закуп',reason:'Согласовать закуп с командой',items:[{id:'ak47',price:2700}],roles:['Игрок 1 — A ramp','Игрок 2 — размен','Игрок 3 — поддержка','Игрок 4 — mid','Игрок 5 — бомба'],steps:['Занять подходы','Получить информацию','Перегруппироваться'],fallback:'Отойти по контакту',assumptions:['Гранаты команды нужно подтвердить'],call:'Держим подходы, ждём инфу',lesson:'Играть на размен',economy:'Сохранить остаток',inventory:'Стартовый пистолет',proBasis:'Принцип default из руководства, не конкретный про-раунд',referenceIds:['refrag-defaults']});
+const answer=()=>({type:'Обмежена закупівля',reason:'Согласовать закуп с командой',items:[{id:'ak47',price:2700}],roles:['Игрок 1 — A ramp','Игрок 2 — размен','Игрок 3 — поддержка','Игрок 4 — mid','Игрок 5 — бомба'],steps:['Занять подходы','Получить информацию','Перегруппироваться'],fallback:'Отойти по контакту',assumptions:['Гранаты команды нужно подтвердить'],call:'Держим подходы, ждём инфу',lesson:'Играть на размен',economy:'Сохранить остаток',inventory:'Стартовый пистолет',proBasis:'Принцип default из руководства, не конкретный про-раунд',referenceIds:['refrag-defaults']});
 const ok=p=>new Response(JSON.stringify({choices:[{finish_reason:'stop',message:{content:JSON.stringify(p)}}]}),{status:200});
 
 test('AI response determines plan; totals are computed, not trusted',()=>{
   const p=validatePlan({...answer(),cost:1,balance:9999,source:'local'},s);
-  assert.equal(p.type,'Ограниченный закуп');assert.equal(p.cost,2700);assert.equal(p.balance,500);assert.equal(p.source,'groq');assert.equal(p.references[0].id,'refrag-defaults');
-  const save=validatePlan({...answer(),items:[],type:'Сохраняем'}, {...s,money:0});assert.equal(save.cost,0);assert.equal(save.type,'Сохраняем');
+  assert.equal(p.type,'Обмежена закупівля');assert.equal(p.cost,2700);assert.equal(p.balance,500);assert.equal(p.source,'groq');assert.equal(p.references[0].id,'refrag-defaults');
+  const save=validatePlan({...answer(),items:[],type:'Еко'}, {...s,money:0});assert.equal(save.cost,0);assert.equal(save.type,'Еко');
 });
 test('reject over-budget, malformed, incomplete and fabricated citations',()=>{
   for(const patch of [{items:[{id:'awp',price:4750}]},{items:[{id:'smoke',price:-1}]},{items:[{id:'smoke',price:0}]},{items:[{id:'smoke',price:'300'}]},{items:[{id:'smoke',price:2.5}]},{roles:['only one']},{steps:[]},{reason:''},{reason:'x'.repeat(1201)},{assumptions:[]},{referenceIds:['fake-match']},{referenceIds:['teses-cologne2020']}])assert.throws(()=>validatePlan({...answer(),...patch},s));
